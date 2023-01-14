@@ -1,23 +1,38 @@
 package ru.job4j.dreamjob.model;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 /**
+ * Класс описывает модель вакансии
+ *
  * @author Artem Chernikov
  * @version 1.0
  * @since 14.01.2023
  */
 public class Vacancy {
+    /**
+     * Поле id вакансии
+     */
     private int id;
+    /**
+     * Поле название вакансии
+     */
     private String title;
+    /**
+     * Поле описание вакансии
+     */
     private String description;
-    private String creationDate;
+    /**
+     * Поле дата и время создания вакансии
+     */
+    private String creationDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
 
-    public Vacancy(int id, String title, String description, String creationDate) {
+    public Vacancy(int id, String title, String description) {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.creationDate = creationDate;
     }
 
     public int getId() {

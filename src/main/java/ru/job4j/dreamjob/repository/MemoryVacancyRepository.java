@@ -2,14 +2,14 @@ package ru.job4j.dreamjob.repository;
 
 import ru.job4j.dreamjob.model.Vacancy;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
 /**
+ * Класс описывает хранилище вакансий в оперативной памяти сервера
+ *
  * @author Artem Chernikov
  * @version 1.0
  * @since 14.01.2023
@@ -22,13 +22,12 @@ public class MemoryVacancyRepository implements VacancyRepository {
     private final Map<Integer, Vacancy> vacancies = new HashMap<>();
 
     public MemoryVacancyRepository() {
-        String localDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
-        save(new Vacancy(0, "Intern Java Developer", "Стажер", localDateTime));
-        save(new Vacancy(0, "Junior Java Developer", "Джуниор", localDateTime));
-        save(new Vacancy(0, "Junior+ Java Developer", "Джуниор+", localDateTime));
-        save(new Vacancy(0, "Middle Java Developer", "Мидл", localDateTime));
-        save(new Vacancy(0, "Middle+ Java Developer", "Мидл+", localDateTime));
-        save(new Vacancy(0, "Senior Java Developer", "Сеньор", localDateTime));
+        save(new Vacancy(0, "Intern Java Developer", "Стажер"));
+        save(new Vacancy(0, "Junior Java Developer", "Джуниор"));
+        save(new Vacancy(0, "Junior+ Java Developer", "Джуниор+"));
+        save(new Vacancy(0, "Middle Java Developer", "Мидл"));
+        save(new Vacancy(0, "Middle+ Java Developer", "Мидл+"));
+        save(new Vacancy(0, "Senior Java Developer", "Сеньор"));
     }
 
     public static MemoryVacancyRepository getInstance() {
@@ -51,7 +50,7 @@ public class MemoryVacancyRepository implements VacancyRepository {
     public boolean update(Vacancy vacancy) {
         return vacancies.computeIfPresent(vacancy.getId(), (id, oldVacancy) ->
                 new Vacancy(oldVacancy.getId(), vacancy.getTitle(),
-                        vacancy.getDescription(), vacancy.getCreationDate())) != null;
+                        vacancy.getDescription())) != null;
     }
 
     @Override
