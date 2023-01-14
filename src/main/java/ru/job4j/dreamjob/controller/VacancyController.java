@@ -1,0 +1,26 @@
+package ru.job4j.dreamjob.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import ru.job4j.dreamjob.repository.MemoryVacancyRepository;
+import ru.job4j.dreamjob.repository.VacancyRepository;
+
+/**
+ * @author Artem Chernikov
+ * @version 1.0
+ * @since 14.01.2023
+ */
+@Controller
+@RequestMapping("/vacancies") /* Работать с кандидатами будем по URI /vacancies/** */
+public class VacancyController {
+    private final VacancyRepository vacancyRepository = MemoryVacancyRepository.getInstance();
+
+    @GetMapping
+    public String getAll(Model model) {
+        model.addAttribute("vacancies", vacancyRepository.findAll());
+        return "vacancies/list";
+    }
+
+}
