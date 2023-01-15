@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 /**
- * Общий интерфейс всех репозиториев
+ * Общий интерфейс всех репозиториев c вакансиями
  *
  * @author Artem Chernikov
  * @version 1.0

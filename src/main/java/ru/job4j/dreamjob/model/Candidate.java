@@ -1,0 +1,86 @@
+package ru.job4j.dreamjob.model;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Objects;
+
+/**
+ * Класс описывает модель кандидата на вакансию
+ *
+ * @author Artem Chernikov
+ * @version 1.0
+ * @since 15.01.2023
+ */
+public class Candidate {
+    /**
+     * Поле id кандидата
+     */
+    private int id;
+    /**
+     * Поле ФИО кандидата
+     */
+    private String name;
+    /**
+     * Поле описание кандидата
+     */
+    private String description;
+    /**
+     * Поле дата и время появления кандидата
+     */
+    private String creationDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
+
+    public Candidate(int id, String name, String description) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(String creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Candidate candidate = (Candidate) o;
+        return id == candidate.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+}
