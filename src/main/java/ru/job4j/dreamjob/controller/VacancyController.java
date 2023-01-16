@@ -15,7 +15,7 @@ import ru.job4j.dreamjob.repository.VacancyRepository;
  * @since 14.01.2023
  */
 @Controller
-@RequestMapping("/vacancies") /* Работать с кандидатами будем по URI /vacancies/** */
+@RequestMapping("/vacancies")
 public class VacancyController {
     private final VacancyRepository vacancyRepository = MemoryVacancyRepository.getInstance();
 
