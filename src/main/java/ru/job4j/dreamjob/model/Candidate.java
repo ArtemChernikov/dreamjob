@@ -16,7 +16,7 @@ public class Candidate {
      */
     private int id;
     /**
-     * Поле ФИО кандидата
+     * Поле название желаемой должности кандидата
      */
     private String name;
     /**
@@ -32,6 +32,9 @@ public class Candidate {
         this.id = id;
         this.name = name;
         this.description = description;
+    }
+
+    public Candidate() {
     }
 
     public int getId() {

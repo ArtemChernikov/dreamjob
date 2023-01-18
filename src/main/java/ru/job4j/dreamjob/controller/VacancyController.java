@@ -45,12 +45,26 @@ public class VacancyController {
         return "vacancies/create";
     }
 
+    /**
+     * Метод используется для сохранения новой вакансии в хранилище
+     *
+     * @param vacancy - вакансия
+     * @return - возвращает отображение со списком всех вакансий
+     */
     @PostMapping("/create")
     public String create(@ModelAttribute Vacancy vacancy) {
         vacancyRepository.save(vacancy);
         return "redirect:/vacancies";
     }
 
+    /**
+     * Метод используется для поиска по id и вывода отображения
+     * с возможностью просмотра, редактирования и удаления вакансии
+     *
+     * @param model - {@link Model}
+     * @param id    - id вакансии
+     * @return - возвращает отображение с возможностью просмотра, редактирования и удаления вакансии
+     */
     @GetMapping("/{id}")
     public String getById(Model model, @PathVariable int id) {
         var vacancyOptional = vacancyRepository.findById(id);
@@ -62,6 +76,13 @@ public class VacancyController {
         return "vacancies/one";
     }
 
+    /**
+     * Метод используется для обновления данных о вакансии
+     *
+     * @param vacancy - вакансия
+     * @param model   - {@link Model}
+     * @return - возвращает отображение со списком всех вакансий
+     */
     @PostMapping("/update")
     public String update(@ModelAttribute Vacancy vacancy, Model model) {
         var isUpdated = vacancyRepository.update(vacancy);
@@ -72,6 +93,13 @@ public class VacancyController {
         return "redirect:/vacancies";
     }
 
+    /**
+     * Метод используется для удаления вакансии
+     *
+     * @param model - {@link Model}
+     * @param id    - id вакансии
+     * @return - возвращает отображение со списком всех вакансий
+     */
     @GetMapping("/delete/{id}")
     public String delete(Model model, @PathVariable int id) {
         var isDeleted = vacancyRepository.deleteById(id);
