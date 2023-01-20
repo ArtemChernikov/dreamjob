@@ -17,7 +17,6 @@ import java.util.Optional;
  */
 @Repository
 public class MemoryVacancyRepository implements VacancyRepository {
-    private static final MemoryVacancyRepository INSTANCE = new MemoryVacancyRepository();
 
     private int nextId = 1;
 
@@ -30,10 +29,6 @@ public class MemoryVacancyRepository implements VacancyRepository {
         save(new Vacancy(0, "Middle Java Developer", "Мидл"));
         save(new Vacancy(0, "Middle+ Java Developer", "Мидл+"));
         save(new Vacancy(0, "Senior Java Developer", "Сеньор"));
-    }
-
-    public static MemoryVacancyRepository getInstance() {
-        return INSTANCE;
     }
 
     @Override

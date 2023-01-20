@@ -5,7 +5,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.dreamjob.model.Vacancy;
 import ru.job4j.dreamjob.repository.CandidateRepository;
-import ru.job4j.dreamjob.service.SimpleVacancyService;
 import ru.job4j.dreamjob.service.VacancyService;
 
 /**
@@ -21,7 +20,11 @@ public class VacancyController {
     /**
      * Поле {@link CandidateRepository} - хранилище с вакансиями
      */
-    private final VacancyService vacancyService = SimpleVacancyService.getInstance();
+    private final VacancyService vacancyService;
+
+    public VacancyController(VacancyService vacancyService) {
+        this.vacancyService = vacancyService;
+    }
 
     /**
      * Метод используется для вывода в браузере отображения всех вакансий
