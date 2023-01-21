@@ -27,11 +27,16 @@ public class Vacancy {
      * Поле дата и время создания вакансии
      */
     private LocalDateTime creationDate = LocalDateTime.now();
+    /**
+     * Поле видимость вакансии в отображении
+     */
+    private boolean visible;
 
-    public Vacancy(int id, String title, String description) {
+    public Vacancy(int id, String title, String description, boolean visible) {
         this.id = id;
         this.title = title;
         this.description = description;
+        this.visible = visible;
     }
 
     public Vacancy() {
@@ -67,6 +72,14 @@ public class Vacancy {
 
     public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public boolean getVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
     }
 
     @Override

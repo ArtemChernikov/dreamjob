@@ -26,12 +26,12 @@ public class MemoryVacancyRepository implements VacancyRepository {
     private final Map<Integer, Vacancy> vacancies = new HashMap<>();
 
     public MemoryVacancyRepository() {
-        save(new Vacancy(0, "Intern Java Developer", "Стажер"));
-        save(new Vacancy(0, "Junior Java Developer", "Джуниор"));
-        save(new Vacancy(0, "Junior+ Java Developer", "Джуниор+"));
-        save(new Vacancy(0, "Middle Java Developer", "Мидл"));
-        save(new Vacancy(0, "Middle+ Java Developer", "Мидл+"));
-        save(new Vacancy(0, "Senior Java Developer", "Сеньор"));
+        save(new Vacancy(0, "Intern Java Developer", "Стажер", true));
+        save(new Vacancy(0, "Junior Java Developer", "Джуниор", true));
+        save(new Vacancy(0, "Junior+ Java Developer", "Джуниор+", true));
+        save(new Vacancy(0, "Middle Java Developer", "Мидл", true));
+        save(new Vacancy(0, "Middle+ Java Developer", "Мидл+", true));
+        save(new Vacancy(0, "Senior Java Developer", "Сеньор", true));
     }
 
     @Override
@@ -50,7 +50,7 @@ public class MemoryVacancyRepository implements VacancyRepository {
     public boolean update(Vacancy vacancy) {
         return vacancies.computeIfPresent(vacancy.getId(), (id, oldVacancy) ->
                 new Vacancy(oldVacancy.getId(), vacancy.getTitle(),
-                        vacancy.getDescription())) != null;
+                        vacancy.getDescription(), vacancy.getVisible())) != null;
     }
 
     @Override
