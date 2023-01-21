@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.dreamjob.model.Vacancy;
-import ru.job4j.dreamjob.repository.CandidateRepository;
+import ru.job4j.dreamjob.service.CityService;
 import ru.job4j.dreamjob.service.VacancyService;
 
 /**
@@ -20,12 +20,17 @@ import ru.job4j.dreamjob.service.VacancyService;
 @RequestMapping("/vacancies")
 public class VacancyController {
     /**
-     * Поле {@link CandidateRepository} - хранилище с вакансиями
+     * Поле {@link VacancyService} - класс-сервис по работе с вакансиями
      */
     private final VacancyService vacancyService;
+    /**
+     * Поле {@link CityService} - класс-сервис по работе с городами
+     */
+    private final CityService cityService;
 
-    public VacancyController(VacancyService vacancyService) {
+    public VacancyController(VacancyService vacancyService, CityService cityService) {
         this.vacancyService = vacancyService;
+        this.cityService = cityService;
     }
 
     /**
@@ -46,7 +51,8 @@ public class VacancyController {
      * @return - возвращает отображение с созданием новой вакансии
      */
     @GetMapping("/create")
-    public String getCreationPage() {
+    public String getCreationPage(Model model) {
+        model.addAttribute("cities", cityService.findAll());
         return "vacancies/create";
     }
 
@@ -77,6 +83,7 @@ public class VacancyController {
             model.addAttribute("message", "Вакансия с указанным идентификатором не найдена");
             return "errors/404";
         }
+        model.addAttribute("cities", cityService.findAll());
         model.addAttribute("vacancy", vacancyOptional.get());
         return "vacancies/one";
     }

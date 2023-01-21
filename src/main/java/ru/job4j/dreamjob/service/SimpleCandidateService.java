@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 /**
- * Класс-сервис для работы с кандидатами в хранилище
+ * Класс-сервис для работы с кандидатами в репозитории
  *
  * @author Artem Chernikov
  * @version 1.0

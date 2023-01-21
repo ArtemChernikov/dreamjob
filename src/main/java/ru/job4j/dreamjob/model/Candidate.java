@@ -27,11 +27,16 @@ public class Candidate {
      * Поле дата и время появления кандидата
      */
     private LocalDateTime creationDate = LocalDateTime.now();
+    /**
+     * Поле id города кандидата
+     */
+    private int cityId;
 
-    public Candidate(int id, String name, String description) {
+    public Candidate(int id, String name, String description, int cityId) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.cityId = cityId;
     }
 
     public Candidate() {
@@ -67,6 +72,14 @@ public class Candidate {
 
     public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public int getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(int cityId) {
+        this.cityId = cityId;
     }
 
     @Override

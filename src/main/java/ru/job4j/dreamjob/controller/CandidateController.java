@@ -5,8 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.dreamjob.model.Candidate;
-import ru.job4j.dreamjob.repository.CandidateRepository;
 import ru.job4j.dreamjob.service.CandidateService;
+import ru.job4j.dreamjob.service.CityService;
 
 /**
  * Класс-контроллер для работы с кандидатами
@@ -20,12 +20,17 @@ import ru.job4j.dreamjob.service.CandidateService;
 @RequestMapping("/candidates")
 public class CandidateController {
     /**
-     * Поле {@link CandidateRepository} - хранилище с кандидатами
+     * Поле {@link CandidateService} - класс-сервис по работе с кандидатами
      */
     private final CandidateService candidateService;
+    /**
+     * Поле {@link CityService} - класс-сервис по работе с городами
+     */
+    private final CityService cityService;
 
-    public CandidateController(CandidateService candidateService) {
+    public CandidateController(CandidateService candidateService, CityService cityService) {
         this.candidateService = candidateService;
+        this.cityService = cityService;
     }
 
     /**
@@ -46,7 +51,8 @@ public class CandidateController {
      * @return - возвращает отображение с созданием нового кандидата
      */
     @GetMapping("/create")
-    public String getCreationPage() {
+    public String getCreationPage(Model model) {
+        model.addAttribute("cities", cityService.findAll());
         return "candidates/create";
     }
 
@@ -77,6 +83,7 @@ public class CandidateController {
             model.addAttribute("message", "Кандидат с указанным идентификатором не найден");
             return "errors/404";
         }
+        model.addAttribute("cities", cityService.findAll());
         model.addAttribute("candidate", candidateOptional.get());
         return "candidates/one";
     }
