@@ -1,5 +1,7 @@
 package ru.job4j.dreamjob.model;
 
+import java.util.Objects;
+
 /**
  * Класс описывает модель города
  *
@@ -23,5 +25,22 @@ public class City {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        City city = (City) o;
+        return id == city.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

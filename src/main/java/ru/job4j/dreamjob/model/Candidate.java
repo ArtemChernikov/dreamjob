@@ -32,11 +32,17 @@ public class Candidate {
      */
     private int cityId;
 
-    public Candidate(int id, String name, String description, int cityId) {
+    /**
+     * Поле id файла канидата
+     */
+    private int fileID;
+
+    public Candidate(int id, String name, String description, int cityId, int fileID) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.cityId = cityId;
+        this.fileID = fileID;
     }
 
     public Candidate() {
@@ -80,6 +86,14 @@ public class Candidate {
 
     public void setCityId(int cityId) {
         this.cityId = cityId;
+    }
+
+    public int getFileId() {
+        return fileID;
+    }
+
+    public void setFileId(int fileID) {
+        this.fileID = fileID;
     }
 
     @Override
