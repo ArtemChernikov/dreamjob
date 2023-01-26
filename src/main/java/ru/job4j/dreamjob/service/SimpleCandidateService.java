@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 /**
- * Класс-сервис для работы с кандидатами в репозитории
+ * Класс-сервис для работы с кандидатами {@link Candidate} в репозитории
  *
  * @author Artem Chernikov
  * @version 1.0

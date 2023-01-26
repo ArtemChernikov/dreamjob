@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Класс описывает хранилище городов в оперативной памяти сервера
+ * Класс-репозиторий для работы с городами {@link City} в оперативной памяти сервера
  *
  * @author Artem Chernikov
  * @version 1.0

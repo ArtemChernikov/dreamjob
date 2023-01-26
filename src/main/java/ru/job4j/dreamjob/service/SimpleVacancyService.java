@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 /**
- * Класс-сервис для работы с вакансиями в репозитории
+ * Класс-сервис для работы с вакансиями {@link Vacancy} в репозитории
  *
  * @author Artem Chernikov
  * @version 1.0
@@ -26,8 +26,8 @@ public class SimpleVacancyService implements VacancyService {
      */
     private final FileService fileService;
 
-    public SimpleVacancyService(VacancyRepository vacancyRepository, FileService fileService) {
-        this.vacancyRepository = vacancyRepository;
+    public SimpleVacancyService(VacancyRepository sql2oVacancyRepository, FileService fileService) {
+        this.vacancyRepository = sql2oVacancyRepository;
         this.fileService = fileService;
     }
 

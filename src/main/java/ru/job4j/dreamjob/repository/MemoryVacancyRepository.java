@@ -11,7 +11,7 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Класс описывает хранилище вакансий в оперативной памяти сервера
+ * Класс-репозиторий для работы с вакансиями {@link Vacancy} в оперативной памяти сервера
  *
  * @author Artem Chernikov
  * @version 1.0

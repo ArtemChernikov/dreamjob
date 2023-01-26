@@ -1,7 +1,9 @@
 package ru.job4j.dreamjob.dto;
 
+import ru.job4j.dreamjob.model.File;
+
 /**
- * DTO (Data Transfer Object) для класса {@link ru.job4j.dreamjob.model.File}
+ * DTO (Data Transfer Object) для класса {@link File}
  *
  * @author Artem Chernikov
  * @version 1.0
@@ -15,7 +17,7 @@ public class FileDto {
     /**
      * Поле содержимое файла в байтах (контент)
      */
-    private byte[] content; /*тут кроется различие. доменная модель хранит путь, а не содержимое*/
+    private byte[] content;
 
     public FileDto(String name, byte[] content) {
         this.name = name;

@@ -1,6 +1,7 @@
 package ru.job4j.dreamjob.model;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -11,6 +12,19 @@ import java.util.Objects;
  * @since 14.01.2023
  */
 public class Vacancy {
+    /**
+     * Метод используется для маппинга модели вакансии {@link Vacancy}
+     * где ключи это названия столбцов в БД, а значения это названия полей модели
+     */
+    public static final Map<String, String> COLUMN_MAPPING = Map.of(
+            "id", "id",
+            "title", "title",
+            "description", "description",
+            "creation_date", "creationDate",
+            "visible", "visible",
+            "city_id", "cityId",
+            "file_id", "fileId"
+    );
     /**
      * Поле id вакансии
      */

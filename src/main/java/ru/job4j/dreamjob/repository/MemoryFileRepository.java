@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Класс описывает хранилище файлов в оперативной памяти сервера
+ * Класс-репозиторий для работы с файлами {@link File} в оперативной памяти сервера
  *
  * @author Artem Chernikov
  * @version 1.0

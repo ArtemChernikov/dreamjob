@@ -14,6 +14,8 @@
 - Spring Boot
 - Spring MVC
 - Spring core
+- SQL2o
+- Commons-dbcp2
 - Maven
 - Git
 

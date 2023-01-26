@@ -7,7 +7,7 @@ import ru.job4j.dreamjob.repository.CityRepository;
 import java.util.Collection;
 
 /**
- * Класс-сервис для работы с городами в репозитории
+ * Класс-сервис для работы с городами {@link City} в репозитории
  *
  * @author Artem Chernikov
  * @version 1.0
@@ -20,8 +20,8 @@ public class SimpleCityService implements CityService {
      */
     private final CityRepository cityRepository;
 
-    public SimpleCityService(CityRepository cityRepository) {
-        this.cityRepository = cityRepository;
+    public SimpleCityService(CityRepository sql2oCityRepository) {
+        this.cityRepository = sql2oCityRepository;
     }
 
     @Override

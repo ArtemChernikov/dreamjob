@@ -11,7 +11,7 @@ import ru.job4j.dreamjob.service.CityService;
 import ru.job4j.dreamjob.service.VacancyService;
 
 /**
- * Класс-контроллер для работы с вакансиями
+ * Класс-контроллер для работы с вакансиями {@link Vacancy}
  *
  * @author Artem Chernikov
  * @version 1.0

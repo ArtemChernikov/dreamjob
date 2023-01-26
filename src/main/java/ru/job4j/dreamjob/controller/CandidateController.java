@@ -11,7 +11,7 @@ import ru.job4j.dreamjob.service.CandidateService;
 import ru.job4j.dreamjob.service.CityService;
 
 /**
- * Класс-контроллер для работы с кандидатами
+ * Класс-контроллер для работы с кандидатами {@link Candidate}
  *
  * @author Artem Chernikov
  * @version 1.0
@@ -103,7 +103,7 @@ public class CandidateController {
      * @return - возвращает отображение со списком всех кандидатов
      */
     @PostMapping("/update")
-    public String update(@ModelAttribute Candidate candidate,  @RequestParam MultipartFile file, Model model) {
+    public String update(@ModelAttribute Candidate candidate, @RequestParam MultipartFile file, Model model) {
         try {
             var isUpdated = candidateService.update(candidate, new FileDto(file.getOriginalFilename(), file.getBytes()));
             if (!isUpdated) {
