@@ -1,3 +1,3 @@
-insert into cities(name) values('Москва');
-insert into cities(name) values('Санкт-Петербург');
-insert into cities(name) values('Екатеринбург');
+INSERT INTO cities(name) VALUES('Москва');
+INSERT INTO cities(name) VALUES('Санкт-Петербург');
+INSERT INTO cities(name) VALUES('Екатеринбург');

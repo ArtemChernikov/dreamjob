@@ -1,10 +1,10 @@
-create table vacancies
+CREATE TABLE vacancies
 (
-    id            serial primary key,
-    title         varchar not null,
-    description   varchar not null,
-    creation_date timestamp,
-    visible       boolean not null,
-    city_id       int references cities(id),
-    file_id       int references files(id)
+    id            SERIAL PRIMARY KEY,
+    title         VARCHAR NOT NULL,
+    description   VARCHAR NOT NULL,
+    creation_date TIMESTAMP,
+    visible       BOOLEAN NOT NULL,
+    city_id       INT REFERENCES cities(id),
+    file_id       INT REFERENCES files(id)
 );

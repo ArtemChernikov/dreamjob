@@ -1,5 +1,5 @@
-create table cities
+CREATE TABLE cities
 (
-    id   serial primary key,
-    name varchar not null unique
+    id   SERIAL PRIMARY KEY,
+    name VARCHAR NOT NULL UNIQUE
 );
