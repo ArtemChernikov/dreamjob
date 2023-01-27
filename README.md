@@ -16,6 +16,8 @@
 - Spring core
 - SQL2o
 - Commons-dbcp2
+- Junit5
+- Liquibase
 - Maven
 - Git
 

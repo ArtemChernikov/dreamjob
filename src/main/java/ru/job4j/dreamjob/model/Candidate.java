@@ -58,6 +58,15 @@ public class Candidate {
         this.fileID = fileID;
     }
 
+    public Candidate(int id, String name, String description, LocalDateTime creationDate, int cityId, int fileID) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.creationDate = creationDate;
+        this.cityId = cityId;
+        this.fileID = fileID;
+    }
+
     public Candidate() {
     }
 
