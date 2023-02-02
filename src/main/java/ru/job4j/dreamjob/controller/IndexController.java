@@ -14,6 +14,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @ThreadSafe
 @Controller
 public class IndexController {
+    /**
+     * Метод используется для отображения начальной страницы веб-приложения
+     *
+     * @return - возвращает начальную страницу
+     */
     @GetMapping("/index")
     public String getIndex() {
         return "index";
