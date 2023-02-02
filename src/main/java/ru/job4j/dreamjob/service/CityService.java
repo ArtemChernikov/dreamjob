@@ -5,7 +5,7 @@ import ru.job4j.dreamjob.model.City;
 import java.util.Collection;
 
 /**
- * Интерфейс для реализаций сервисов для работы с городами в хранилищах
+ * Общий интерфейс для сервисов по работе с городами {@link City}
  *
  * @author Artem Chernikov
  * @version 1.0

@@ -7,7 +7,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 /**
- * Интерфейс для реализаций сервисов для работы с кандидатами в хранилищах
+ * Общий интерфейс для сервисов по работе с кандидатами {@link Candidate}
  *
  * @author Artem Chernikov
  * @version 1.0
