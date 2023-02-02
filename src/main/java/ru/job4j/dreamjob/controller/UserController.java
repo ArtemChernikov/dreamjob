@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.job4j.dreamjob.model.User;
 import ru.job4j.dreamjob.service.UserService;
+import ru.job4j.dreamjob.model.Vacancy;
 
 /**
  * Класс-контроллер для работы с пользователями {@link User}
@@ -45,7 +46,7 @@ public class UserController {
      *
      * @param model - {@link Model}
      * @param user  - данные нового пользователя
-     * @return - при успешной регистрации возвращает на главную страницу,
+     * @return - при успешной регистрации выполняется переход на страницу с вакансиями {@link Vacancy},
      * при вводе данных пользователя с уже существующим email перенаправляет на страницу ошибки
      */
     @PostMapping("/register")
@@ -55,6 +56,35 @@ public class UserController {
             model.addAttribute("message", "Пользователь с данной почтой уже существует");
             return "errors/404";
         }
-        return "redirect:/index";
+        return "redirect:/vacancies";
+    }
+
+    /**
+     * Метод используется для отображения входа в аккаунт пользователя
+     *
+     * @return - возвращает отображение с входом в аккаунт
+     */
+    @GetMapping("/login")
+    public String getLoginPage() {
+        return "users/login";
+    }
+
+    /**
+     * Метод используется для входа в аккаунт пользователя, если данные введены корректно
+     * выполняется переход на страницу с вакансиями {@link Vacancy},
+     * если нет то будет ошибка о неккоректности введенных данных
+     *
+     * @param user  - введенные данные пользователя для входа в аккаунт
+     * @param model - {@link Model} используется для отображения ошибки о невалидных данных
+     * @return - возвращает отображение с вакансиями, если данные введены корректно, если нет то возвращает страницу с авторизацией
+     */
+    @PostMapping("/login")
+    public String loginUser(@ModelAttribute User user, Model model) {
+        var userOptional = userService.findByEmailAndPassword(user.getEmail(), user.getPassword());
+        if (userOptional.isEmpty()) {
+            model.addAttribute("error", "Почта или пароль введены неверно");
+            return "users/login";
+        }
+        return "redirect:/vacancies";
     }
 }
