@@ -40,13 +40,7 @@ public class UserController {
      * @return - возвращает страницу с регистрацией
      */
     @GetMapping("/register")
-    public String getRegistrationPage(Model model, HttpSession session) {
-        var user = (User) session.getAttribute("user");
-        if (user == null) {
-            user = new User();
-            user.setName("Гость");
-        }
-        model.addAttribute("user", user);
+    public String getRegistrationPage() {
         return "users/registration";
     }
 
@@ -59,13 +53,7 @@ public class UserController {
      * при вводе данных пользователя с уже существующим email перенаправляет на страницу ошибки
      */
     @PostMapping("/register")
-    public String register(Model model, @ModelAttribute User postUser, HttpSession session) {
-        var user = (User) session.getAttribute("user");
-        if (user == null) {
-            user = new User();
-            user.setName("Гость");
-        }
-        model.addAttribute("user", user);
+    public String register(Model model, @ModelAttribute User postUser) {
         var newUser = userService.save(postUser);
         if (newUser.isEmpty()) {
             model.addAttribute("message", "Пользователь с данной почтой уже существует");
@@ -80,13 +68,7 @@ public class UserController {
      * @return - возвращает отображение с входом в аккаунт
      */
     @GetMapping("/login")
-    public String getLoginPage(Model model, HttpSession session) {
-        var user = (User) session.getAttribute("user");
-        if (user == null) {
-            user = new User();
-            user.setName("Гость");
-        }
-        model.addAttribute("user", user);
+    public String getLoginPage() {
         return "users/login";
     }
 
@@ -100,15 +82,9 @@ public class UserController {
      * @return - возвращает отображение с вакансиями, если данные введены корректно, если нет то возвращает страницу с авторизацией
      */
     @PostMapping("/login")
-    public String loginUser(@ModelAttribute User postUser, Model model, HttpServletRequest request, HttpSession session) {
+    public String loginUser(@ModelAttribute User postUser, Model model, HttpServletRequest request) {
         var userOptional = userService.findByEmailAndPassword(postUser.getEmail(), postUser.getPassword());
         if (userOptional.isEmpty()) {
-            var user = (User) session.getAttribute("user");
-            if (user == null) {
-                user = new User();
-                user.setName("Гость");
-            }
-            model.addAttribute("user", user);
             model.addAttribute("error", "Почта или пароль введены неверно");
             return "users/login";
         }
