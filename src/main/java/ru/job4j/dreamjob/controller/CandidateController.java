@@ -7,8 +7,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.job4j.dreamjob.dto.FileDto;
 import ru.job4j.dreamjob.model.Candidate;
+import ru.job4j.dreamjob.model.User;
 import ru.job4j.dreamjob.service.CandidateService;
 import ru.job4j.dreamjob.service.CityService;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * Класс-контроллер для работы с кандидатами {@link Candidate}
@@ -42,7 +45,13 @@ public class CandidateController {
      * @return - возвращает отображение со всеми кандидатами
      */
     @GetMapping
-    public String getAll(Model model) {
+    public String getAll(Model model, HttpSession session) {
+        var user = (User) session.getAttribute("user");
+        if (user == null) {
+            user = new User();
+            user.setName("Гость");
+        }
+        model.addAttribute("user", user);
         model.addAttribute("candidates", candidateService.findAll());
         return "candidates/list";
     }
@@ -53,7 +62,13 @@ public class CandidateController {
      * @return - возвращает отображение с созданием нового кандидата
      */
     @GetMapping("/create")
-    public String getCreationPage(Model model) {
+    public String getCreationPage(Model model, HttpSession session) {
+        var user = (User) session.getAttribute("user");
+        if (user == null) {
+            user = new User();
+            user.setName("Гость");
+        }
+        model.addAttribute("user", user);
         model.addAttribute("cities", cityService.findAll());
         return "candidates/create";
     }
@@ -65,7 +80,14 @@ public class CandidateController {
      * @return - возвращает отображение со списком всех кандидатов
      */
     @PostMapping("/create")
-    public String create(@ModelAttribute Candidate candidate, @RequestParam MultipartFile file, Model model) {
+    public String create(@ModelAttribute Candidate candidate, @RequestParam MultipartFile file,
+                         Model model, HttpSession session) {
+        var user = (User) session.getAttribute("user");
+        if (user == null) {
+            user = new User();
+            user.setName("Гость");
+        }
+        model.addAttribute("user", user);
         try {
             candidateService.save(candidate, new FileDto(file.getOriginalFilename(), file.getBytes()));
             return "redirect:/candidates";
@@ -84,7 +106,13 @@ public class CandidateController {
      * @return - возвращает отображение с возможностью просмотра, редактирования и удаления кандидата
      */
     @GetMapping("/{id}")
-    public String getById(Model model, @PathVariable int id) {
+    public String getById(Model model, @PathVariable int id, HttpSession session) {
+        var user = (User) session.getAttribute("user");
+        if (user == null) {
+            user = new User();
+            user.setName("Гость");
+        }
+        model.addAttribute("user", user);
         var candidateOptional = candidateService.findById(id);
         if (candidateOptional.isEmpty()) {
             model.addAttribute("message", "Кандидат с указанным идентификатором не найден");
@@ -103,7 +131,14 @@ public class CandidateController {
      * @return - возвращает отображение со списком всех кандидатов
      */
     @PostMapping("/update")
-    public String update(@ModelAttribute Candidate candidate, @RequestParam MultipartFile file, Model model) {
+    public String update(@ModelAttribute Candidate candidate, @RequestParam MultipartFile file,
+                         Model model, HttpSession session) {
+        var user = (User) session.getAttribute("user");
+        if (user == null) {
+            user = new User();
+            user.setName("Гость");
+        }
+        model.addAttribute("user", user);
         try {
             var isUpdated = candidateService.update(candidate, new FileDto(file.getOriginalFilename(), file.getBytes()));
             if (!isUpdated) {
@@ -125,7 +160,13 @@ public class CandidateController {
      * @return - возвращает отображение со списком всех кандидатов
      */
     @GetMapping("/delete/{id}")
-    public String delete(Model model, @PathVariable int id) {
+    public String delete(Model model, @PathVariable int id, HttpSession session) {
+        var user = (User) session.getAttribute("user");
+        if (user == null) {
+            user = new User();
+            user.setName("Гость");
+        }
+        model.addAttribute("user", user);
         var isDeleted = candidateService.deleteById(id);
         if (!isDeleted) {
             model.addAttribute("message", "Кандидат с указанным идентификатором не найден");

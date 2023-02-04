@@ -11,6 +11,9 @@ import ru.job4j.dreamjob.model.User;
 import ru.job4j.dreamjob.service.UserService;
 import ru.job4j.dreamjob.model.Vacancy;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 /**
  * Класс-контроллер для работы с пользователями {@link User}
  *
@@ -37,7 +40,13 @@ public class UserController {
      * @return - возвращает страницу с регистрацией
      */
     @GetMapping("/register")
-    public String getRegistrationPage() {
+    public String getRegistrationPage(Model model, HttpSession session) {
+        var user = (User) session.getAttribute("user");
+        if (user == null) {
+            user = new User();
+            user.setName("Гость");
+        }
+        model.addAttribute("user", user);
         return "users/registration";
     }
 
@@ -45,13 +54,19 @@ public class UserController {
      * Метод используется для регистрации нового пользователя {@link User} и сохранения его в БД
      *
      * @param model - {@link Model}
-     * @param user  - данные нового пользователя
+     * @param postUser  - данные нового пользователя
      * @return - при успешной регистрации выполняется переход на страницу с вакансиями {@link Vacancy},
      * при вводе данных пользователя с уже существующим email перенаправляет на страницу ошибки
      */
     @PostMapping("/register")
-    public String register(Model model, @ModelAttribute User user) {
-        var newUser = userService.save(user);
+    public String register(Model model, @ModelAttribute User postUser, HttpSession session) {
+        var user = (User) session.getAttribute("user");
+        if (user == null) {
+            user = new User();
+            user.setName("Гость");
+        }
+        model.addAttribute("user", user);
+        var newUser = userService.save(postUser);
         if (newUser.isEmpty()) {
             model.addAttribute("message", "Пользователь с данной почтой уже существует");
             return "errors/404";
@@ -60,12 +75,18 @@ public class UserController {
     }
 
     /**
-     * Метод используется для отображения входа в аккаунт пользователя
+     * Метод используется для отображения авторизации пользователя
      *
      * @return - возвращает отображение с входом в аккаунт
      */
     @GetMapping("/login")
-    public String getLoginPage() {
+    public String getLoginPage(Model model, HttpSession session) {
+        var user = (User) session.getAttribute("user");
+        if (user == null) {
+            user = new User();
+            user.setName("Гость");
+        }
+        model.addAttribute("user", user);
         return "users/login";
     }
 
@@ -74,17 +95,37 @@ public class UserController {
      * выполняется переход на страницу с вакансиями {@link Vacancy},
      * если нет то будет ошибка о неккоректности введенных данных
      *
-     * @param user  - введенные данные пользователя для входа в аккаунт
+     * @param postUser  - введенные данные пользователя для входа в аккаунт
      * @param model - {@link Model} используется для отображения ошибки о невалидных данных
      * @return - возвращает отображение с вакансиями, если данные введены корректно, если нет то возвращает страницу с авторизацией
      */
     @PostMapping("/login")
-    public String loginUser(@ModelAttribute User user, Model model) {
-        var userOptional = userService.findByEmailAndPassword(user.getEmail(), user.getPassword());
+    public String loginUser(@ModelAttribute User postUser, Model model, HttpServletRequest request, HttpSession session) {
+        var userOptional = userService.findByEmailAndPassword(postUser.getEmail(), postUser.getPassword());
         if (userOptional.isEmpty()) {
+            var user = (User) session.getAttribute("user");
+            if (user == null) {
+                user = new User();
+                user.setName("Гость");
+            }
+            model.addAttribute("user", user);
             model.addAttribute("error", "Почта или пароль введены неверно");
             return "users/login";
         }
+        var newSession = request.getSession();
+        newSession.setAttribute("user", userOptional.get());
         return "redirect:/vacancies";
+    }
+
+    /**
+     * Метод используется для выхода пользователя из системы
+     *
+     * @param session - {@link HttpSession} сессия пользователя
+     * @return - возвращает отображение с авторизацией пользователя
+     */
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/users/login";
     }
 }
