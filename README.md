@@ -35,6 +35,7 @@
 - Spring Core
 - PostgreSQL
 - Thymeleaf
+- Bootstrap
 - H2database
 - SQL2o
 - Commons-dbcp2
