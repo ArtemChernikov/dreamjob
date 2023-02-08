@@ -23,6 +23,7 @@
 - SQL2o
 - Commons-dbcp2
 - Junit5
+- Mockito
 - Liquibase
 - Maven
 - Git
