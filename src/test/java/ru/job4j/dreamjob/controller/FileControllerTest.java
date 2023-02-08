@@ -40,11 +40,7 @@ class FileControllerTest {
     @Test
     public void whenRequestFileByNonExistIdThenNotFoundFile() {
         when(fileService.getFileById(any(Integer.class))).thenReturn(Optional.empty());
-
         var actualFile = fileController.getById(1);
-
         assertThat(actualFile.getBody()).isNull();
     }
-
-
 }
