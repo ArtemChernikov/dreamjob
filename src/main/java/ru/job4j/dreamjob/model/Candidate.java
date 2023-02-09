@@ -48,23 +48,23 @@ public class Candidate {
     /**
      * Поле id файла канидата
      */
-    private int fileID;
+    private int fileId;
 
-    public Candidate(int id, String name, String description, int cityId, int fileID) {
+    public Candidate(int id, String name, String description, int cityId, int fileId) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.cityId = cityId;
-        this.fileID = fileID;
+        this.fileId = fileId;
     }
 
-    public Candidate(int id, String name, String description, LocalDateTime creationDate, int cityId, int fileID) {
+    public Candidate(int id, String name, String description, LocalDateTime creationDate, int cityId, int fileId) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.creationDate = creationDate;
         this.cityId = cityId;
-        this.fileID = fileID;
+        this.fileId = fileId;
     }
 
     public Candidate() {
@@ -111,11 +111,11 @@ public class Candidate {
     }
 
     public int getFileId() {
-        return fileID;
+        return fileId;
     }
 
     public void setFileId(int fileID) {
-        this.fileID = fileID;
+        this.fileId = fileID;
     }
 
     @Override
