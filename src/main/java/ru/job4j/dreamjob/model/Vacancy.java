@@ -13,7 +13,7 @@ import java.util.Objects;
  */
 public class Vacancy {
     /**
-     * Метод используется для маппинга модели вакансии {@link Vacancy}
+     * Поле используется для маппинга модели вакансии {@link Vacancy}
      * где ключи это названия столбцов в БД, а значения это названия полей модели
      */
     public static final Map<String, String> COLUMN_MAPPING = Map.of(
