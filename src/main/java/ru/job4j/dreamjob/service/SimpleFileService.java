@@ -104,7 +104,8 @@ public class SimpleFileService implements FileService {
     }
 
     /**
-     * Метод используется для поиска {@link FileDto} по его id в репозитории
+     * Метод используется для поиска {@link File} по его id в репозитории
+     * и дальнейшей загрузки контента в DTO {@link FileDto}
      *
      * @param id - id файла {@link File}
      * @return - возвращает {@link Optional<FileDto>}
