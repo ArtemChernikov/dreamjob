@@ -1,5 +1,6 @@
 package ru.job4j.dreamjob.repository;
 
+import lombok.extern.slf4j.Slf4j;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Repository;
 import org.sql2o.Sql2o;
@@ -15,6 +16,7 @@ import java.util.Optional;
  * @since 30.01.2023
  */
 @ThreadSafe
+@Slf4j
 @Repository
 public class Sql2oUserRepository implements UserRepository {
     /**
@@ -47,8 +49,9 @@ public class Sql2oUserRepository implements UserRepository {
                 user.setId(generatedId);
                 return Optional.of(user);
             } catch (Exception e) {
-            return Optional.empty();
+            log.error(e.getMessage(), e);
         }
+        return Optional.empty();
     }
 
     /**

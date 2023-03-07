@@ -1,5 +1,6 @@
 package ru.job4j.dreamjob.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,7 @@ import ru.job4j.dreamjob.service.CityService;
  * @since 15.01.2023
  */
 @ThreadSafe
+@Slf4j
 @Controller
 @RequestMapping("/candidates")
 public class CandidateController {
@@ -71,6 +73,7 @@ public class CandidateController {
             candidateService.save(candidate, new FileDto(file.getOriginalFilename(), file.getBytes()));
             return "redirect:/candidates";
         } catch (Exception exception) {
+            log.error(exception.getMessage(), exception);
             model.addAttribute("message", exception.getMessage());
             return "errors/404";
         }
@@ -114,6 +117,7 @@ public class CandidateController {
             }
             return "redirect:/candidates";
         } catch (Exception exception) {
+            log.error(exception.getMessage(), exception);
             model.addAttribute("message", exception.getMessage());
             return "errors/404";
         }

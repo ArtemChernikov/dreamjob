@@ -148,6 +148,4 @@ public class SimpleFileService implements FileService {
         deleteFile(fileOptional.get().getPath());
         return fileRepository.deleteById(id);
     }
-
-
 }

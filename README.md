@@ -14,6 +14,7 @@
 - **Java 17**
 - **Spring Boot 2.7.6**
 - **PostgreSQL 14**
+- **Slf4j**
 - **HTML 5**
 - **Thymeleaf 2.7.6**
 - **Bootstrap 4.4.1**
