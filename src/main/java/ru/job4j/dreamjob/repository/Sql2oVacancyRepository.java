@@ -52,6 +52,7 @@ public class Sql2oVacancyRepository implements VacancyRepository {
             return vacancy;
         }
     }
+
     /**
      * Метод используется для удаления вакансии {@link Vacancy} по id в БД
      *
